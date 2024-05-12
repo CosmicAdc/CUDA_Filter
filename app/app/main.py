@@ -7,13 +7,16 @@ from .sobel import filtroSobel, FiltroSobelParams
 from typing import List
 import os
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 
-app = FastAPI()
+app = FastAPI(static_directory="app/static")
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Permitir solicitudes desde cualquier origen
+    allow_origins=["*"], 
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["*"],
@@ -23,8 +26,6 @@ SAVE_PATH_ORIGINAL = "app/static/originales/"
 SAVE_PATH_SOBEL = "app/static/sobel/"
 SAVE_PATH_GAUSS = "app/static/gauss/"
 SAVE_PATH_MEDIANA = "app/static/mediana/"
-
-
 
 ##Subir imagen al servidor
 @app.post("/upload/")
@@ -52,18 +53,19 @@ async def filtro_sobel(params: FiltroSobelParams):
 
 
     path=SAVE_PATH_ORIGINAL+str(path_file)
-    imagenFinal, tiempo = filtroSobel(path,bloques_x,bloques_y,mascara)
+    imagenFinal, tiempo , bloques, grids ,ancho , alto = filtroSobel(path,bloques_x,bloques_y,mascara)
 
     path_final=SAVE_PATH_SOBEL+'Sobel-'+str(mascara)+'-'+str(path_file)
     cv2.imwrite(path_final, imagenFinal)
 
-    return {"tiempo de ejecución":  tiempo }
+    return {"ruta_imagen": path_final, "tiempo": tiempo, "filtro":"Sobel X","bloques": bloques, "grids": grids,"ancho": ancho, "alto": alto}
 
 
 
 @app.get("/")
-def read_root():
-    return {"message": "¡Hola, FastAPI!"}
+async def list_files(directory: str = ".") -> List[str]:
+    files = os.listdir(directory)
+    return files
 
 
 

@@ -89,7 +89,10 @@ def filtroSobel(path,BloqueX,BloqueY,mascara):
     outputImageGPU = np.empty((alto, ancho), dtype=np.uint8)
     cuda.memcpy_dtoh(outputImageGPU, d_output)
 
-    return outputImageGPU, tiempo
+    bloques=int(BloqueX)*int(BloqueY)
+    grids=((ancho + blocks[0] - 1) // blocks[0]) * ((alto + blocks[1] - 1) // blocks[1])
+    
+    return outputImageGPU, tiempo ,bloques , grids , ancho , alto
 
 
     

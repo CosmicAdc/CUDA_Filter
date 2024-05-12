@@ -34,6 +34,14 @@ export class ClienteService {
   filtroSobel(params: any): Observable<any> {
     return this.http.post<any>(this.ruta + 'filtroSobel/', params);
   }
+  filtroMediana(params: any): Observable<any> {
+    return this.http.post<any>(this.ruta + 'Mediana/', params);
+  }
+
+  filtroGauss(params: any): Observable<any> {
+    return this.http.post<any>(this.ruta + 'Gauss/', params);
+  }
+
 
 
 

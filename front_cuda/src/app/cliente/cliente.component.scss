@@ -1,21 +1,33 @@
 .outer-container {
-    display: flex;
-    justify-content: center; /* Centrar el contenido horizontalmente */
-    align-items: center; /* Centrar el contenido verticalmente */
-    height: 100vh; /* Utilizar el 100% de la altura de la ventana */
-    width: 550px;
+    display: flexbox;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    width: 1200px; /* Utilizar el 100% del ancho disponible */
+    padding-top: 10%;/* Eliminar el padding */
+
   }
   
   .container {
+    margin: 20px 40px; /* Ajustar el margen */
+    padding-top: 30px; /* Ajustar el espacio superior */
+    padding-bottom: 30px; /* Ajustar el espacio inferior */
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f0f0f0; /* Color de fondo del contenedor */
-    padding: 20px;
+    background-color: #f0f0f0;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width:100%; 
-    max-width: 1000px; /* Ancho máximo del contenedor */
+    width: 48%;
+  }
+
+  .left-container {
+    order: 1; /* Cambia el orden del primer contenedor */
+  }
+  
+  .right-container {
+    order: 2; /* Cambia el orden del segundo contenedor */
+    overflow: hidden;
   }
   
   
@@ -95,4 +107,15 @@
     width: 100px; /* Ajusta el ancho según sea necesario */
   }
   
-  
+  .result-image img {
+    max-width: 100%; /* Ajusta el ancho máximo de la imagen al contenedor */
+    height: auto; /* Permite que la altura se ajuste automáticamente */
+    display: block; /* Asegura que la imagen no tenga espacios vacíos debajo de ella */
+  }
+
+  .header {
+    background-color: #333; /* Cambia el color de fondo según sea necesario */
+    color: #fff; /* Cambia el color del texto según sea necesario */
+    text-align: center; /* Centra el texto */
+    padding: 20px 0; /* Añade un relleno arriba y abajo */
+  }
