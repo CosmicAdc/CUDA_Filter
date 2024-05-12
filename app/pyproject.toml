@@ -10,6 +10,7 @@ python = "^3.10"
 uvicorn = "^0.29.0"
 fastapi = "^0.111.0"
 opencv-python = "^4.9.0.80"
+pycuda = "2023.1"
 
 
 [build-system]
