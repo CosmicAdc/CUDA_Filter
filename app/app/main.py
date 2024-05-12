@@ -6,8 +6,18 @@ import uuid
 from .sobel import filtroSobel, FiltroSobelParams
 from typing import List
 import os
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Permitir solicitudes desde cualquier origen
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_headers=["*"],
+)
 
 SAVE_PATH_ORIGINAL = "app/static/originales/"
 SAVE_PATH_SOBEL = "app/static/sobel/"
@@ -27,7 +37,7 @@ async def upload_files(files: List[UploadFile] = File(...)):
 
         filename = os.path.splitext(file.filename)[0]
 
-        cv2.imwrite(f"{SAVE_PATH_ORIGINAL}{filename}-ORIGINAL.jpg", gray_img)
+        cv2.imwrite(f"{SAVE_PATH_ORIGINAL}{filename}.jpg", gray_img)
 
         print(f"File '{file.filename}' guardado")
     return {"message": "Subida exitosamente"}
@@ -40,10 +50,11 @@ async def filtro_sobel(params: FiltroSobelParams):
     bloques_y = params.bloques_y
     path_file = params.path_file
 
+
     path=SAVE_PATH_ORIGINAL+str(path_file)
     imagenFinal, tiempo = filtroSobel(path,bloques_x,bloques_y,mascara)
 
-    path_final=SAVE_PATH_SOBEL+'-Sobel-'+str(mascara)+'.jpg'
+    path_final=SAVE_PATH_SOBEL+'Sobel-'+str(mascara)+'-'+str(path_file)
     cv2.imwrite(path_final, imagenFinal)
 
     return {"tiempo de ejecución":  tiempo }

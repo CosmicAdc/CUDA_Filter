@@ -1,0 +1,44 @@
+<div class="outer-container">
+    <div class="container">
+      <h1>Aplicación de Filtros CUDA</h1>
+      <div class="preview">
+        <img *ngIf="imageUrl" [src]="imageUrl" alt="Vista previa de la imagen">
+      </div>
+      <div class="upload">
+        <label for="fileInput" class="custom-file-upload">
+          <i class="fa fa-cloud-upload"></i> Seleccionar imagen
+        </label>
+        <input id="fileInput" type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none;">
+      </div>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="filter" (change)="selectedFilter = 'SobelX'"> SobelX
+        </label>
+        <label class="option">
+          <input type="radio" name="filter" (change)="selectedFilter = 'Gauss'"> Gauss
+        </label>
+        <label class="option">
+          <input type="radio" name="filter" (change)="selectedFilter = 'Mediana'"> Mediana
+        </label>
+  
+
+        <div class="numeric-input">
+            <label class="option">
+                Tamaño de máscara:<br>
+                <input type="number" name="maskSize" [(ngModel)]="maskSize" min="1" (input)="validateMaskSize($event)">
+            </label>
+            <label class="option">
+              Bloques a lanzar en X:<br>
+              <input type="number" name="blockX" [(ngModel)]="blockX" min="1" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            </label>
+            <label class="option">
+              Bloques a lanzar en Y:<br>
+              <input type="number" name="blockY" [(ngModel)]="blockY" min="1" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            </label>
+          </div>
+  
+      </div>
+      <button class="apply-button" (click)="applySelectedFilter()">Aplicar</button>
+    </div>
+  </div>
+  

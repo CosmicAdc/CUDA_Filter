@@ -1,0 +1,98 @@
+.outer-container {
+    display: flex;
+    justify-content: center; /* Centrar el contenido horizontalmente */
+    align-items: center; /* Centrar el contenido verticalmente */
+    height: 100vh; /* Utilizar el 100% de la altura de la ventana */
+    width: 550px;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0; /* Color de fondo del contenedor */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width:100%; 
+    max-width: 1000px; /* Ancho máximo del contenedor */
+  }
+  
+  
+  .preview img {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #000000;
+    border-radius: 5px;
+  }
+  
+  .upload {
+    margin-top: 20px;
+  }
+  
+  .custom-file-upload {
+    display: inline-block;
+    border: 2px solid #4CAF50;
+    color: #4CAF50;
+    background-color: #f9f9f9;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .custom-file-upload:hover {
+    background-color: #e9e9e9;
+  }
+  
+  .options {
+    margin-top: 20px;
+  }
+  
+  .option {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100px;
+  }
+  
+  .option:hover {
+    background-color: #388E3C;
+  }
+
+  .apply-button {
+    margin-top: 20px; 
+    padding: 15px 30px;
+    background-color: #4CAF50; 
+    color: #fff; 
+    border: none; 
+    border-radius: 5px;
+    cursor: pointer; 
+    transition: background-color 0.5s ease; 
+    font-size: 22px;
+  }
+  
+  .apply-button:hover {
+    background-color: #008f07; 
+  }
+  
+  .numeric-input {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+  }
+  
+  .numeric-input input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-top: 5px;
+    width: 100px; /* Ajusta el ancho según sea necesario */
+  }
+  
+  
