@@ -22,6 +22,7 @@
     tiempo_tot: number = 0; 
     bloques_lanzados: number = 0; 
     grids_lanzados: number = 0; 
+    grids_verdaderos: number = 0; 
     ancho: number = 0; 
     alto: number = 0; 
     filtro_usado:  string | null = null; 
@@ -84,6 +85,7 @@
             this.alto = response2.alto
             this.bloques_lanzados=response2.bloques
             this.grids_lanzados=response2.grids
+            this.grids_verdaderos=response2.grids_verdaderos
             console.log('Segundo servicio completado:', response2, this.finalImageUrl);
 
           },
