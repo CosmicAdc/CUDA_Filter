@@ -95,13 +95,5 @@ async def filtro_gauss(params: FiltroMedianaParams):
     return {"ruta_imagen": path_final, "tiempo": tiempo, "filtro":"Mediana","bloques": bloques, "grids": grids,"ancho": ancho, "alto": alto,"grids_verdaderos": grids_verdaderos}
 
 
-
-@app.get("/")
-async def list_files(directory: str = ".") -> List[str]:
-    files = os.listdir(directory)
-    return files
-
-
-
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

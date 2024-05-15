@@ -90,8 +90,8 @@ def filtroSobel(path,BloqueX,BloqueY,mascara):
     cuda.memcpy_dtoh(outputImageGPU, d_output)
 
     bloques=int(BloqueX)*int(BloqueY)
-    grids=((ancho + blocks[0] - 1)+1 // blocks[0]) * ((alto + blocks[1] - 1)+1 // blocks[1])
-    grids_verdaderos=((ancho + blocks[0] - 1)+1 + (blocks[0]) * (alto + blocks[1] - 1)+1)
+    grids=((ancho + blocks[0])+1 // blocks[0]) * ((alto + blocks[1])+1 // blocks[1])
+    grids_verdaderos=((ancho + blocks[0])+1 + (blocks[0]) * (alto + blocks[1])+1)
     
     return outputImageGPU, tiempo ,bloques , grids , ancho , alto, grids_verdaderos
 

@@ -1,6 +1,4 @@
-import pycuda
 import numpy as np
-import cv2
 import pycuda.autoinit
 import pycuda.driver as cuda
 from pycuda.compiler import SourceModule
@@ -69,22 +67,17 @@ def creaciónMODCUDA(TAM_MASCARA):
 def filtroMediana(path,BloqueX,BloqueY,mascara):
 
     mod= creaciónMODCUDA(mascara)
-
     imagen= cargarImagen(path)
     alto, ancho = imagen.shape
-
     blocks = (BloqueX, BloqueY,1)
-
     num_grids = ((ancho + blocks[0] + 1) // blocks[0],
               (alto + blocks[1] + 1) // blocks[1],1)
-
     # Crear espacio de memoria en GPU para la imagen de entrada y salida
     d_input = cuda.mem_alloc(ancho * alto * np.dtype(np.uint8).itemsize)
     d_output = cuda.mem_alloc(ancho * alto * np.dtype(np.uint8).itemsize)
 
     # Copiar la imagen de entrada a la GPU
     cuda.memcpy_htod(d_input, imagen)
-
 
     func = mod.get_function("medianFilter")
     startGPU = time.time()
@@ -98,8 +91,8 @@ def filtroMediana(path,BloqueX,BloqueY,mascara):
     cuda.memcpy_dtoh(outputImageGPU, d_output)
 
     bloques=int(BloqueX)*int(BloqueY)
-    grids=((ancho + blocks[0] - 1)+1 // blocks[0]) * ((alto + blocks[1] - 1)+1 // blocks[1])
-    grids_verdaderos=((ancho + blocks[0] - 1)+1 + (blocks[0]) * (alto + blocks[1] - 1)+1)
+    grids=((ancho + blocks[0])+1 // blocks[0]) * ((alto + blocks[1])+1 // blocks[1])
+    grids_verdaderos=((ancho + blocks[0])+1 + (blocks[0]) * (alto + blocks[1])+1)
     
     return outputImageGPU, tiempo ,bloques , grids , ancho , alto,grids_verdaderos
 

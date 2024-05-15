@@ -96,8 +96,8 @@ def filtroGauss(path,BloqueX,BloqueY,mascara):
     cuda.memcpy_htod(d_K, np.array(gaussian_kernel_flat, dtype=np.float32))
 
     # Reservar memoria en la GPU para la imagen de entrada y salida
-    d_input = cuda.mem_alloc(imagen.nbytes)
-    d_output = cuda.mem_alloc(imagen.nbytes)
+    d_input = cuda.mem_alloc(ancho * alto * np.dtype(np.uint8).itemsize)
+    d_output = cuda.mem_alloc(ancho * alto * np.dtype(np.uint8).itemsize)
 
     # Copiar la imagen de entrada a la memoria de la GPU
     cuda.memcpy_htod(d_input, imagen)
@@ -115,8 +115,8 @@ def filtroGauss(path,BloqueX,BloqueY,mascara):
     cuda.memcpy_dtoh(outputImageGPU, d_output)
 
     bloques=int(BloqueX)*int(BloqueY)
-    grids=((ancho + blocks[0] - 1)+1 // blocks[0]) * ((alto + blocks[1] - 1)+1 // blocks[1])
-    grids_verdaderos=((ancho + blocks[0] - 1)+1 + (blocks[0]) * (alto + blocks[1] - 1)+1)
+    grids=((ancho + blocks[0])+1 // blocks[0]) * ((alto + blocks[1])+1 // blocks[1])
+    grids_verdaderos=((ancho + blocks[0])+1 + (blocks[0]) * (alto + blocks[1])+1)
     
     return outputImageGPU, tiempo ,bloques , grids , ancho , alto,grids_verdaderos
 
